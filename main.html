@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>EveryKnit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <h1 class="itim-regular" style="text-align: center">EveryKnit
+      </h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="main.html" style="color: #fff">Home</a></li><li>게이지 계산기</li><li>단수 계산기</li>
+      </ul>
+    </nav><br><br>
+    <section class="container">
+      <article class="left">
+        <h3>대바늘 기초 뜨개</h3>
+        <table>
+          <tr>
+            <td width="280px"><a href="#" onclick="showIframe('knitting/caston.html'); return false;">
+              코 잡기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="showIframe('knitting/knit-purl.html'); return false;">
+              겉뜨기·안뜨기</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="showIframe('knitting/gart.html'); return false;">
+              가터뜨기</a></td>
+          </tr>
+          <tr>
+            <td><a href="html/ex9-4.html" target="right-frame">
+              메리야스뜨기</a></td>
+          </tr>
+          <tr>
+            <td><a href="html/ex9-5.html" target="right-frame">
+              고무뜨기</a></td>
+          </tr>
+          <tr>
+            <td><a href="html/ex9-5.html" target="right-frame">
+              코막음(편물 마무리)</a></td>
+          </tr>
+        </table>
+        <h3>대바늘 고급 뜨개</h3>
+        <table>
+          <tr>
+            <td width="280px"><a href="html/ex9-6.html" target="right-frame">
+              경사뜨기</a></td>
+          </tr>
+          <tr>
+            <td><a href="html/ex9-7.html" target="right-frame">
+              코 늘리기</a></td>
+          </tr>
+          <tr>
+            <td><a href="html/ex9-8.html" target="right-frame">
+             코 줄이기</a></td>
+          </tr>
+          <tr>
+            <td><a href="html/ex9-9.html" target="right-frame">
+             교차뜨기(꽈배기 뜨기)</a></td>
+          </tr>
+          <tr>
+            <td><a href="html/ex9-11.html" target="right-frame">
+              휘감아뜨기</a></td>
+          </tr>
+          <tr>
+            <td><a href="html/ex9-12.html" target="right-frame">
+              바늘 비우기</a></td>
+          </tr>
+        </table>
+      </article>
+
+      <article class="right">
+        <div class="slides">
+          <div class="slide" style="background-image: url('media/main_back.jpg');"></div>
+          <div class="slide" style="background-image: url('media/main_back2.jpg');"></div>
+          <div class="slide" style="background-image: url('media/main_back3.jpg');"></div>
+          <div class="slide" style="background-image: url('media/main_back4.jpg');"></div>
+        </div>
+        <iframe name="right-frame" id="right-frame" frameborder="0" style="display: none;"></iframe>
+      </article>
+    </section>
+    <footer><br><br></footer>
+
+    <script src="slide.js"></script>
+  </body>
+</html>

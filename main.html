@@ -11,12 +11,13 @@
   </head>
   <body>
     <header>
-      <h1 class="itim-regular" style="text-align: center">EveryKnit
-      </h1>
+      <h1 class="itim-regular" style="text-align: center">EveryKnit</h1>
     </header>
     <nav>
       <ul>
-        <li><a href="main.html" style="color: #fff">Home</a></li><li>게이지 계산기</li><li>단수 계산기</li>
+        <li><a href="main.html" style="color: #fff">Home</a></li>
+        <li><a href='#' onclick="showFullSectionIframe('knitting/gage_cal.html'); return false;" style="color: #fff">게이지 계산기</a></li>
+        <li>단수 계산기</li>
       </ul>
     </nav><br><br>
     <section class="container">
@@ -36,16 +37,20 @@
               가터뜨기</a></td>
           </tr>
           <tr>
-            <td><a href="html/ex9-4.html" target="right-frame">
+            <td width="280px"><a href="#" onclick="showIframe('knitting/stock.html'); return false;">
               메리야스뜨기</a></td>
           </tr>
           <tr>
-            <td><a href="html/ex9-5.html" target="right-frame">
+            <td width="280px"><a href="#" onclick="showIframe('knitting/ribbing.html'); return false;">
               고무뜨기</a></td>
           </tr>
           <tr>
-            <td><a href="html/ex9-5.html" target="right-frame">
+            <td width="280px"><a href="#" onclick="showIframe('knitting/bind_off.html'); return false;">
               코막음(편물 마무리)</a></td>
+          </tr>
+          <tr>
+            <td width="280px"><a href="#" onclick="showIframe('knitting/gage.html'); return false;">
+              게이지 이해하기</a></td>
           </tr>
         </table>
         <h3>대바늘 고급 뜨개</h3>

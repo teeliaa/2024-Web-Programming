@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>게이지 계산기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_sub.css">
+  </head>
+  <body>
+    <h3 style="text-align: center">게이지 계산기</h3>
+    <p style="text-align: center">내 게이지를 입력하고, 도안 게이지와 도안에서 떠야할 코수/단수를 입력하면 내가 떠야할 코수/단수가 나옵니다</p><br><br>
+
+    <article class="left">
+      <p>내 게이지 코수: <input type="text" name="mygage" placeholder="내 게이지 코수 입력"><br>
+        내 게이지 단수: <input type="text" name="mydan" placeholder="내 게이지 코수 단수"><br>
+        도안 게이지 코수: <input type="text" name="patgage" placeholder="도안 게이지 코수 입력"><br>
+        도안 게이지 단수: <input type="text" name="patgagedan" placeholder="도안 게이지 코수 단수"><br>
+        도안 코수: <input type="text" name="patternnum" placeholder="도안 코수 입력"><br>
+        도안 단수: <input type="text" name="patterdan" placeholder="도안 코수 단수"><br>
+      </p><br><br>
+      <button type="button" name="button">계산하기</button>
+    </article>
+    <article class="right">
+      <p id="result"></p>
+    </article>
+  </body>
+</html>

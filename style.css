@@ -139,6 +139,11 @@ table {
   display: block;
 }
 
+table a:hover{
+  text-shadow: 0 0 4px gray;
+  font-weight: bold;
+}
+
 td {
   padding: 1px;
   text-align: center;

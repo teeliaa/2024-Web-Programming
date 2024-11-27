@@ -1,5 +1,9 @@
 html, body{
-  overflow: auto;
+  /*overflow: auto;*/
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 header{
@@ -74,6 +78,7 @@ nav ul li:hover {
 }
 
 .container{
+  min-height: calc(100vh - 200px - 40px);
   font-family: "Noto Sans KR", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
@@ -109,13 +114,15 @@ nav ul li:hover {
 }
 
 section {
-  margin-top: 0;
   display: flex; /* flexbox 사용 */
   justify-content: center; /* 수평 중앙 정렬 */
   align-items: center; /* 수직 중앙 정렬 */
+  /*min-height: auto;*/
   height: 100vh; /* section의 높이를 화면 전체로 설정 */
   width: 100%; /* section의 너비를 화면 전체로 설정 */
   position: relative; /* 상대 위치 설정 */
+  margin-bottom: 20px;
+  /*overflow: hidden;*/
 }
 
 section article h3{
@@ -133,7 +140,7 @@ section article h3{
 
 table {
   border-collapse: separate;
-  border-spacing: 10px 8px;
+  border-spacing: 10px 6.5px;
   margin-left: 50px;
   margin-top: 5px;
   display: block;
@@ -170,14 +177,45 @@ a{
   flex-shrink: 0;
 }
 
+.iframe-container{
+  display: none;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+
 iframe {
     width: 100%;
     height: 100%;
-    position: relative;
+    /*position: relative;*/
     z-index: 1; /* iframe이 슬라이드 위에 표시되도록 */
+    border: none;
+    display: none;
 }
 
 footer{
   background-color: #efe5dc;
   margin-top: 40px;
+  bottom: 0;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  padding: 10px;
 }
+
+#full-section-frame {
+    width: 70%;
+    height: 100%;
+    border: none;
+    display: block;
+    position: relative;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    margin-top: 0 auto;
+}
+

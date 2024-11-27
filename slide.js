@@ -79,3 +79,4 @@ window.onload = function() {
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'auto';
   };
+};

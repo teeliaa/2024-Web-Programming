@@ -79,4 +79,25 @@ window.onload = function() {
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'auto';
   };
+
+  window.showHome = function() {
+    const leftSection = document.querySelector('.left');
+    const rightSection = document.querySelector('.right');
+    const slides = document.querySelector('.slides');
+    const fullSectionFrame = document.getElementById('full-section-frame');
+    const fullSectionContainer = document.querySelector('section.iframe-container');
+
+    if (leftSection) leftSection.style.display = 'block';
+    if (rightSection) rightSection.style.display = 'block';
+    if (slides) slides.style.display = 'flex';
+
+    if (fullSectionFrame) {
+      fullSectionFrame.style.display = 'none';
+      fullSectionFrame.src = ""; // iframe의 콘텐츠를 리셋
+    }
+    if (fullSectionContainer) fullSectionContainer.style.display = 'none';
+
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
+  };
 };

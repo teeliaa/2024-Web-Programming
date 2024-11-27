@@ -33,11 +33,6 @@
 
         document.getElementById('result').innerHTML = result;
       }
-
-      // iframe 내에서 높이를 부모에게 전달
-      window.onload = function() {
-        window.parent.postMessage({ action: "setHeight", height: document.body.scrollHeight }, "*");
-      };
     </script>
   </head>
   <body>
@@ -61,3 +56,4 @@
   </section>
   </body>
 </html>
+

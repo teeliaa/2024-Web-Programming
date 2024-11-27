@@ -1,3 +1,4 @@
+window.onload = function() {
   let currentSlide = 0;
 
   function showSlide(index) {
@@ -12,46 +13,69 @@
     showSlide(currentSlide + 1);
   }, 3000);
 
-  window.showIframe = function(src) {
-    const slides = document.querySelector('.slides'); // 슬라이드 요소 찾기
-    if (slides) {
-      slides.style.display = 'none'; // 슬라이드를 숨기기
-    }
-
-    const iframe = document.getElementById('right-frame');
+  function adjustIframeHeight(iframe) {
     if (iframe) {
-      iframe.style.display = 'block'; // iframe 보이기
-      iframe.src = src; // iframe에 src 설정
-    } else {
-      console.error("iframe 요소를 찾을 수 없습니다.");
+      iframe.onload = function () {
+        const contentHeight = iframe.contentWindow.document.body.scrollHeight + 'px';
+        iframe.style.height = contentHeight;
+
+        // iframe-container 높이도 조절
+        const fullSectionContainer = document.querySelector('section.iframe-container');
+        if (fullSectionContainer) {
+          fullSectionContainer.style.height = contentHeight;
+        }
+      };
     }
-};
-
-window.showFullSectionIframe = function(src) {
-    // 'left'와 'right' 영역 숨기기
-    document.querySelector('.left').style.display = 'none';
-    document.querySelector('.right').style.display = 'none';
-
-    // section 영역 비우기
-    const section = document.querySelector('section');
-    section.innerHTML = ''; // 기존 내용 지우기
-
-    // 새 iframe 요소 생성
-    const iframe = document.createElement('iframe');
-    iframe.src = src;
-    iframe.frameborder = '0';
-    iframe.style.width = '70%';
-    iframe.style.height = '100%';
-    iframe.style.border = 'none';
-
-    if (src.includes('gage_cal.html')) {
-       // gage_cal.html일 때, 전체 페이지의 높이를 조정
-       document.documentElement.style.height = '100%'; // HTML의 높이를 100%로 설정
-       document.body.style.height = '100%'; // BODY의 높이를 100%로 설정
-       document.documentElement.style.overflow = 'hidden'; // 바깥 스크롤 숨기기
-       section.style.height = '100vh'; // section의 높이를 화면 크기와 맞춤
-   }
-
-    // section에 iframe 추가
-    section.appendChild(iframe);
   }
+
+  window.showIframe = function(src) {
+    const slides = document.querySelector('.slides');
+    const iframe = document.getElementById('right-frame');
+    const leftSection = document.querySelector('.left');
+    const rightSection = document.querySelector('.right');
+
+    if (slides) slides.style.display = 'none';
+    if (iframe) {
+      iframe.style.display = 'block';
+      iframe.src = src;
+    }
+    if (leftSection) leftSection.style.display = 'block';
+    if (rightSection) rightSection.style.display = 'block';
+  };
+
+  window.showFullSectionIframe = function(src) {
+    const leftSection = document.querySelector('.left');
+    const rightSection = document.querySelector('.right');
+    const slides = document.querySelector('.slides');
+    const container = document.querySelector('.container');
+    const fullSectionFrame = document.getElementById('full-section-frame');
+    const fullSectionContainer = document.querySelector('section.iframe-container');
+
+    if (leftSection) leftSection.style.display = 'none';
+    if (rightSection) rightSection.style.display = 'none';
+    if (slides) slides.style.display = 'none';
+    if (container) container.style.display = 'none';
+
+    if (fullSectionContainer) {
+        fullSectionContainer.style.display = 'block';
+        fullSectionContainer.style.height = '100vh';
+    }
+    if (fullSectionFrame) {
+        fullSectionFrame.style.display = 'block';
+        fullSectionFrame.src = src;
+
+        fullSectionFrame.onload = function () {
+            // Adjust the iframe height based on the content
+            const contentHeight = fullSectionFrame.contentWindow.document.body.scrollHeight + 'px';
+            fullSectionFrame.style.height = contentHeight;
+
+            // Adjust the container height
+            if (fullSectionContainer) {
+                fullSectionContainer.style.height = contentHeight;
+            }
+        };
+    }
+
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'auto';
+  };

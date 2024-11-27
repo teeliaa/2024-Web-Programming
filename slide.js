@@ -16,14 +16,19 @@ window.onload = function() {
   function adjustIframeHeight(iframe) {
     if (iframe) {
       iframe.onload = function () {
-        const contentHeight = iframe.contentWindow.document.body.scrollHeight + 'px';
-        iframe.style.height = contentHeight;
-
-        // iframe-container 높이도 조절
         const fullSectionContainer = document.querySelector('section.iframe-container');
-        if (fullSectionContainer) {
-          fullSectionContainer.style.height = contentHeight;
-        }
+        // iframe의 높이를 postMessage를 사용해 설정하기 위한 이벤트 리스너 추가
+        iframe.contentWindow.postMessage({ action: "getHeight" }, "*");
+
+        window.addEventListener("message", function (event) {
+          if (event.data && event.data.action === "setHeight") {
+            const contentHeight = event.data.height + 'px';
+            iframe.style.height = contentHeight;
+            if (fullSectionContainer) {
+              fullSectionContainer.style.height = contentHeight;
+            }
+          }
+        });
       };
     }
   }
@@ -63,17 +68,7 @@ window.onload = function() {
     if (fullSectionFrame) {
         fullSectionFrame.style.display = 'block';
         fullSectionFrame.src = src;
-
-        fullSectionFrame.onload = function () {
-            // Adjust the iframe height based on the content
-            const contentHeight = fullSectionFrame.contentWindow.document.body.scrollHeight + 'px';
-            fullSectionFrame.style.height = contentHeight;
-
-            // Adjust the container height
-            if (fullSectionContainer) {
-                fullSectionContainer.style.height = contentHeight;
-            }
-        };
+        adjustIframeHeight(fullSectionFrame);
     }
 
     document.documentElement.style.overflow = 'hidden';
@@ -93,7 +88,7 @@ window.onload = function() {
 
     if (fullSectionFrame) {
       fullSectionFrame.style.display = 'none';
-      fullSectionFrame.src = ""; // iframe의 콘텐츠를 리셋
+      fullSectionFrame.src = ""; // iframe의 콘텐츠를 리셋합니다.
     }
     if (fullSectionContainer) fullSectionContainer.style.display = 'none';
 

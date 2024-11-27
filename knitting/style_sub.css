@@ -56,29 +56,67 @@ button{
   text-align: center;
   color: #fff;
   background-color: #d0b8ac;
-  width: 130px;
+  width: 150px;
   height: 40px;
   padding: 5px;
   line-height: 30px;
   border: none;
   border-radius: 40px;
   margin-left: 140px;
+  transition: transform 0.3s ease;
 }
 
-article{
-  display: flex; /* flexbox 사용 */
-  justify-content: space-between; /* 수평 중앙 정렬 */
-  width: 100%; /* section의 너비를 화면 전체로 설정 */
-  position: relative; /* 상대 위치 설정 */
+button:hover{
+  transform: scale(1.1);
 }
+
+section{
+  display: flex;
+  justify-content: space-between;;
+  width: 100%;
+}
+
+/*article{
+  display: flex; /* flexbox 사용 */
+  /*justify-content: space-between; /* 수평 중앙 정렬 */
+  /*width: 100%; /* section의 너비를 화면 전체로 설정 */
+  /*position: relative; /* 상대 위치 설정 */
+/*}*/
 
 .left, .right{
   width: 48%;
-  margin-left: 10px;
+  margin: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  /*margin-left: 10px;*/
 }
 
 .left{
   margin-right: 2%;
   display: flex;
   flex-direction: column;
+}
+
+.right{
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #564239;
+  text-align: center;
+  display: inline-block;
+  margin: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #564239;
+}
+
+.highlighted {
+  background-color: #f3d8c7; /* 클릭 시 색칠된 색상 */
 }

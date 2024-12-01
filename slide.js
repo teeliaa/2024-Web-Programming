@@ -66,12 +66,14 @@ window.onload = function() {
 
         fullSectionFrame.onload = function () {
             // Adjust the iframe height based on the content
-            const contentHeight = fullSectionFrame.contentWindow.document.body.scrollHeight + 'px';
-            fullSectionFrame.style.height = contentHeight;
+            const contentHeight = fullSectionFrame.contentWindow.document.body.scrollHeight;
+            const adjustedHeight = Math.max(contentHeight, window.innerHeight) + 'px';
+            
+            fullSectionFrame.style.height = adjustedHeight;
 
             // Adjust the container height
             if (fullSectionContainer) {
-                fullSectionContainer.style.height = contentHeight;
+                fullSectionContainer.style.minHeight = adjustedHeight;
             }
         };
     }

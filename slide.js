@@ -41,12 +41,11 @@ $(document).ready(function() {
     if (rightSection.length) rightSection.show();
   };
 
-  window.showFullSectionIframe = function(src) {
+  window.showFullSectionAjax = function(url) {
     const leftSection = $('.left');
     const rightSection = $('.right');
     const slides = $('.slides');
     const container = $('.container');
-    const fullSectionFrame = $('#full-section-frame');
     const fullSectionContainer = $('section.iframe-container');
 
     if (leftSection.length) leftSection.hide();
@@ -55,20 +54,16 @@ $(document).ready(function() {
     if (container.length) container.hide();
 
     if (fullSectionContainer.length) {
-        fullSectionContainer.show().css('height', '100vh');
-    }
-    if (fullSectionFrame.length) {
-        fullSectionFrame.show().attr('src', src);
-
-        fullSectionFrame.on('load', function () {
-            const contentHeight = $(fullSectionFrame).contents().find('body').prop('scrollHeight');
-            const adjustedHeight = Math.max(contentHeight, $(window).height()) + 'px';
-            $(fullSectionFrame).css('height', adjustedHeight);
-
-            if (fullSectionContainer.length) {
-                fullSectionContainer.css('minHeight', adjustedHeight);
-            }
-        });
+      $.ajax({
+        url: url,
+        method: 'GET',
+        success: function(data) {
+          fullSectionContainer.html(data).show().css('height', '100vh');
+        },
+        error: function(xhr, status, error) {
+          console.error('Error loading content:', status, error);
+        }
+      });
     }
 
     $('html').css('overflow', 'hidden');

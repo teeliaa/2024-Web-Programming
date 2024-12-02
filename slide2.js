@@ -27,6 +27,11 @@ $(document).ready(function() {
       dataType: 'html',
       success: function(data) {
         rightSection.html(data);
+        // 스타일시트를 추가로 로드
+        $('<link>')
+          .appendTo('head')
+          .attr({type: 'text/css', rel: 'stylesheet'})
+          .attr('href', 'knitting/style_sub.css');
       },
       error: function() {
         rightSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
@@ -54,6 +59,11 @@ $(document).ready(function() {
       dataType: 'html',
       success: function(data) {
         contentSection.html(data).show();
+        // 스타일시트를 추가로 로드
+        $('<link>')
+          .appendTo('head')
+          .attr({type: 'text/css', rel: 'stylesheet'})
+          .attr('href', 'knitting/style_sub.css');
       },
       error: function() {
         contentSection.html('<p>컨텐츠를 로드하는 중 오류가 발생했습니다.</p>');
@@ -75,3 +85,4 @@ $(document).ready(function() {
     $('html, body').css('overflow', 'auto');
   };
 });
+

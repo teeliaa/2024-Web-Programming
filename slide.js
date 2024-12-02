@@ -29,7 +29,6 @@ $(document).ready(function() {
     if (slides.length) slides.hide();
     if (iframe.length) {
       iframe.show().attr('src', src);
-      adjustIframeHeight(iframe);
     }
     if (leftSection.length) leftSection.show();
     if (rightSection.length) rightSection.show();
@@ -53,6 +52,16 @@ $(document).ready(function() {
         method: 'GET',
         success: function(data) {
           fullSectionContainer.html(data).show();
+
+          // style_sub.css 동적으로 추가
+          const linkTag = $('<link>', {
+            rel: 'stylesheet',
+            type: 'text/css',
+            href: 'knitting/style_sub.css'
+          });
+          $('head').append(linkTag);
+
+          // 높이 조정
           adjustContainerHeight(fullSectionContainer);
         },
         error: function(xhr, status, error) {
@@ -85,3 +94,4 @@ $(document).ready(function() {
     $('body').css('overflow', 'auto');
   };
 });
+

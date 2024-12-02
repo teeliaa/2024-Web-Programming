@@ -16,8 +16,8 @@
     <nav>
       <ul>
         <li><a href="main.html" style="color: #fff">Home</a></li>
-        <li><a href='#' onclick="showFullSectionIframe('knitting/gage_cal.html'); return false;" style="color: #fff">게이지 계산기</a></li>
-        <li>단수 기록기</li>
+        <li><a href='#' onclick="showFullSectionAjax('knitting/gage_cal.html'); return false;" style="color: #fff">게이지 계산기</a></li>
+        <li><a href='#' onclick="showFullSectionAjax('knitting/row_count.html'); return false;" style="color: #fff">단수 기록기</a></li>
       </ul>
     </nav><br><br>
     <section class="container">
@@ -25,61 +25,62 @@
         <h3>대바늘 기초 뜨개</h3>
         <table>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/caston.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/caston.html'); return false;">
               코 잡기</a></td>
           </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/knit-purl.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/knit-purl.html'); return false;">
               겉뜨기·안뜨기</a></td>
           </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/gart.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/gart.html'); return false;">
               가터뜨기</a></td>
           </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/stock.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/stock.html'); return false;">
               메리야스뜨기</a></td>
           </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/ribbing.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/ribbing.html'); return false;">
               고무뜨기</a></td>
           </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/bind_off.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/bind_off.html'); return false;">
               코막음(편물 마무리)</a></td>
           </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/gage.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/gage.html'); return false;">
               게이지 이해하기</a></td>
           </tr>
         </table>
         <h3>대바늘 고급 뜨개</h3>
         <table>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/shortrow.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/shortrow.html'); return false;">
               경사뜨기</a></td>
           </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/make.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/make.html'); return false;">
               코 늘리기</a></td>
           </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/shrink.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/shrink.html'); return false;">
              코 줄이기</a></td>
           </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/cross.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/cross.html'); return false;">
              교차뜨기(꽈배기 뜨기)</a></td>
+          </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/through.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/through.html'); return false;">
               꼬아뜨기</a></td>
           </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/yarn_over.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/yarn_over.html'); return false;">
               바늘 비우기</a></td>
           </tr>
           <tr>
-            <td width="280px"><a href="#" onclick="showIframe('knitting/pickup.html'); return false;">
+            <td width="280px"><a href="#" onclick="showIframeAjax('knitting/pickup.html'); return false;">
               코 줍기</a></td>
           </tr>
         </table>
@@ -92,15 +93,13 @@
           <div class="slide" style="background-image: url('media/main_back3.jpg');"></div>
           <div class="slide" style="background-image: url('media/main_back4.jpg');"></div>
         </div>
-        <iframe name="right-frame" id="right-frame" frameborder="0" style="display: none;"></iframe>
       </article>
     </section>
     <section class="container iframe-container">
-      <iframe name="full-section-frame" id="full-section-frame" frameborder="0" style="display: none;"></iframe>
+      <div id="dynamic-content" style="display: none;"></div>
     </section>
     <footer><br><br></footer>
 
     <script src="slide.js" defer></script>
   </body>
 </html>
-

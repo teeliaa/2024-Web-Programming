@@ -1,17 +1,19 @@
 window.onload = function() {
   let currentSlide = 0;
 
-  function showSlide(index) {
-    const slides = document.querySelector('.slides');
+  const slides = document.querySelector('.slides');
+  if(slides){
     const totalSlides = slides.children.length;
 
-    currentSlide = (index + totalSlides) % totalSlides;
-    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-  }
+    function showSlide(indes){
+      currentSlide = (index + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
 
-  setInterval(() => {
-    showSlide(currentSlide + 1);
-  }, 3000);
+    setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 3000);
+  }
 
   function loadContent(src, container) {
     fetch(src)

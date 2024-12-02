@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="slide.js" defer></script>
   </head>
   <body>
     <header>
@@ -17,7 +19,7 @@
       <ul>
         <li><a href="main.html" style="color: #fff">Home</a></li>
         <li><a href='#' onclick="showFullSectionIframe('knitting/gage_cal.html'); return false;" style="color: #fff">게이지 계산기</a></li>
-        <li>단수 기록기</li>
+        <li><a href='#' onclick="showFullSectionIframe('knitting/row_count.html'); return false;" style="color: #fff">단수 기록기</a></li>
       </ul>
     </nav><br><br>
     <section class="container">
@@ -84,6 +86,7 @@
           </tr>
         </table>
       </article>
+
       <article class="right">
         <div class="slides">
           <div class="slide" style="background-image: url('media/main_back.jpg');"></div>
@@ -98,8 +101,6 @@
       <iframe name="full-section-frame" id="full-section-frame" frameborder="0" style="display: none;"></iframe>
     </section>
     <footer><br><br></footer>
-
-    <script src="slide.js" defer></script>
   </body>
 </html>
 

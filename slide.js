@@ -53,11 +53,11 @@ $(document).ready(function() {
         success: function(data) {
           fullSectionContainer.html(data).show();
 
-          // style_sub.css 동적으로 추가
+          // style_sub.css 동적으로 추가 (절대 경로 사용)
           const linkTag = $('<link>', {
             rel: 'stylesheet',
             type: 'text/css',
-            href: 'knitting/style_sub.css'
+            href: '/2024-Web-Programming/knitting/style_sub.css' // 절대 경로로 수정
           });
           $('head').append(linkTag);
 

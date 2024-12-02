@@ -1,12 +1,12 @@
-window.onload = function() {
+$(document).ready(function() {
   let currentSlide = 0;
 
   function showSlide(index) {
-    const slides = document.querySelector('.slides');
-    const totalSlides = slides.children.length;
+    const slides = $('.slides');
+    const totalSlides = slides.children().length;
 
     currentSlide = (index + totalSlides) % totalSlides;
-    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+    slides.css('transform', `translateX(-${currentSlide * 100}%)`);
   }
 
   setInterval(() => {
@@ -15,92 +15,83 @@ window.onload = function() {
 
   function adjustIframeHeight(iframe) {
     if (iframe) {
-      iframe.onload = function () {
-        const contentHeight = iframe.contentWindow.document.body.scrollHeight + 'px';
-        iframe.style.height = contentHeight;
+      $(iframe).on('load', function () {
+        const contentHeight = $(iframe).contents().find('body').prop('scrollHeight') + 'px';
+        $(iframe).css('height', contentHeight);
 
-        // iframe-container 높이도 조절
-        const fullSectionContainer = document.querySelector('section.iframe-container');
-        if (fullSectionContainer) {
-          fullSectionContainer.style.height = contentHeight;
+        const fullSectionContainer = $('section.iframe-container');
+        if (fullSectionContainer.length) {
+          fullSectionContainer.css('height', contentHeight);
         }
-      };
+      });
     }
   }
 
   window.showIframe = function(src) {
-    const slides = document.querySelector('.slides');
-    const iframe = document.getElementById('right-frame');
-    const leftSection = document.querySelector('.left');
-    const rightSection = document.querySelector('.right');
+    const slides = $('.slides');
+    const iframe = $('#right-frame');
+    const leftSection = $('.left');
+    const rightSection = $('.right');
 
-    if (slides) slides.style.display = 'none';
-    if (iframe) {
-      iframe.style.display = 'block';
-      iframe.src = src;
+    if (slides.length) slides.hide();
+    if (iframe.length) {
+      iframe.show().attr('src', src);
     }
-    if (leftSection) leftSection.style.display = 'block';
-    if (rightSection) rightSection.style.display = 'block';
+    if (leftSection.length) leftSection.show();
+    if (rightSection.length) rightSection.show();
   };
 
   window.showFullSectionIframe = function(src) {
-    const leftSection = document.querySelector('.left');
-    const rightSection = document.querySelector('.right');
-    const slides = document.querySelector('.slides');
-    const container = document.querySelector('.container');
-    const fullSectionFrame = document.getElementById('full-section-frame');
-    const fullSectionContainer = document.querySelector('section.iframe-container');
+    const leftSection = $('.left');
+    const rightSection = $('.right');
+    const slides = $('.slides');
+    const container = $('.container');
+    const fullSectionFrame = $('#full-section-frame');
+    const fullSectionContainer = $('section.iframe-container');
 
-    if (leftSection) leftSection.style.display = 'none';
-    if (rightSection) rightSection.style.display = 'none';
-    if (slides) slides.style.display = 'none';
-    if (container) container.style.display = 'none';
+    if (leftSection.length) leftSection.hide();
+    if (rightSection.length) rightSection.hide();
+    if (slides.length) slides.hide();
+    if (container.length) container.hide();
 
-    if (fullSectionContainer) {
-        fullSectionContainer.style.display = 'block';
-        fullSectionContainer.style.height = '100vh';
+    if (fullSectionContainer.length) {
+        fullSectionContainer.show().css('height', '100vh');
     }
-    if (fullSectionFrame) {
-        fullSectionFrame.style.display = 'block';
-        fullSectionFrame.src = src;
+    if (fullSectionFrame.length) {
+        fullSectionFrame.show().attr('src', src);
 
-        fullSectionFrame.onload = function () {
-            // Adjust the iframe height based on the content
-            const contentHeight = fullSectionFrame.contentWindow.document.body.scrollHeight;
-            const adjustedHeight = Math.max(contentHeight, window.innerHeight) + 'px';
-            
-            fullSectionFrame.style.height = adjustedHeight;
+        fullSectionFrame.on('load', function () {
+            const contentHeight = $(fullSectionFrame).contents().find('body').prop('scrollHeight');
+            const adjustedHeight = Math.max(contentHeight, $(window).height()) + 'px';
+            $(fullSectionFrame).css('height', adjustedHeight);
 
-            // Adjust the container height
-            if (fullSectionContainer) {
-                fullSectionContainer.style.minHeight = adjustedHeight;
+            if (fullSectionContainer.length) {
+                fullSectionContainer.css('minHeight', adjustedHeight);
             }
-        };
+        });
     }
 
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'auto';
+    $('html').css('overflow', 'hidden');
+    $('body').css('overflow', 'auto');
   };
 
   window.showHome = function() {
-    const leftSection = document.querySelector('.left');
-    const rightSection = document.querySelector('.right');
-    const slides = document.querySelector('.slides');
-    const fullSectionFrame = document.getElementById('full-section-frame');
-    const fullSectionContainer = document.querySelector('section.iframe-container');
+    const leftSection = $('.left');
+    const rightSection = $('.right');
+    const slides = $('.slides');
+    const fullSectionFrame = $('#full-section-frame');
+    const fullSectionContainer = $('section.iframe-container');
 
-    if (leftSection) leftSection.style.display = 'block';
-    if (rightSection) rightSection.style.display = 'block';
-    if (slides) slides.style.display = 'flex';
+    if (leftSection.length) leftSection.show();
+    if (rightSection.length) rightSection.show();
+    if (slides.length) slides.css('display', 'flex');
 
-    if (fullSectionFrame) {
-      fullSectionFrame.style.display = 'none';
-      fullSectionFrame.src = ""; // iframe의 콘텐츠를 리셋합니다.
+    if (fullSectionFrame.length) {
+      fullSectionFrame.hide().attr('src', '');
     }
-    if (fullSectionContainer) fullSectionContainer.style.display = 'none';
+    if (fullSectionContainer.length) fullSectionContainer.hide();
 
-    document.documentElement.style.overflow = 'auto';
-    document.body.style.overflow = 'auto';
+    $('html').css('overflow', 'auto');
+    $('body').css('overflow', 'auto');
   };
-};
-
+});

@@ -1,73 +1,81 @@
 window.onload = function() {
   let currentSlide = 0;
 
-  const slides = document.querySelector('.slides');
-  if(slides){
+  function showSlide(index) {
+    const slides = document.querySelector('.slides');
     const totalSlides = slides.children.length;
 
-    function showSlide(indes){
-      currentSlide = (index + totalSlides) % totalSlides;
-      slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-
-    setInterval(() => {
-      showSlide(currentSlide + 1);
-    }, 3000);
+    currentSlide = (index + totalSlides) % totalSlides;
+    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
   }
 
-  function loadContent(src, container) {
-    fetch(src)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+  setInterval(() => {
+    showSlide(currentSlide + 1);
+  }, 3000);
+
+  function adjustIframeHeight(iframe) {
+    if (iframe) {
+      iframe.onload = function () {
+        const contentHeight = iframe.contentWindow.document.body.scrollHeight + 'px';
+        iframe.style.height = contentHeight;
+
+        // iframe-container 높이도 조절
+        const fullSectionContainer = document.querySelector('section.iframe-container');
+        if (fullSectionContainer) {
+          fullSectionContainer.style.height = contentHeight;
         }
-        return response.text();
-      })
-      .then(data => {
-        container.innerHTML = data;
-        container.style.display = 'block';
-        adjustContainerHeight(container);
-      })
-      .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-      });
-  }
-
-  function adjustContainerHeight(container) {
-    if (container) {
-      container.style.height = container.scrollHeight + 'px';
+      };
     }
   }
 
-  window.showIframeAjax = function(src) {
+  window.showIframe = function(src) {
     const slides = document.querySelector('.slides');
+    const iframe = document.getElementById('right-frame');
     const leftSection = document.querySelector('.left');
     const rightSection = document.querySelector('.right');
-    const dynamicContent = document.getElementById('dynamic-content');
 
     if (slides) slides.style.display = 'none';
+    if (iframe) {
+      iframe.style.display = 'block';
+      iframe.src = src;
+    }
     if (leftSection) leftSection.style.display = 'block';
     if (rightSection) rightSection.style.display = 'block';
-    if (dynamicContent) dynamicContent.style.display = 'none';
-
-    loadContent(src, rightSection);
   };
 
-  window.showFullSectionAjax = function(src) {
+  window.showFullSectionIframe = function(src) {
     const leftSection = document.querySelector('.left');
     const rightSection = document.querySelector('.right');
     const slides = document.querySelector('.slides');
     const container = document.querySelector('.container');
-    const dynamicContent = document.getElementById('dynamic-content');
+    const fullSectionFrame = document.getElementById('full-section-frame');
+    const fullSectionContainer = document.querySelector('section.iframe-container');
 
     if (leftSection) leftSection.style.display = 'none';
     if (rightSection) rightSection.style.display = 'none';
     if (slides) slides.style.display = 'none';
     if (container) container.style.display = 'none';
 
-    if (dynamicContent) {
-      loadContent(src, dynamicContent);
-      dynamicContent.style.height = '100vh';
+    if (fullSectionContainer) {
+        fullSectionContainer.style.display = 'block';
+        fullSectionContainer.style.height = '100vh';
+    }
+    if (fullSectionFrame) {
+        fullSectionFrame.style.display = 'block';
+        fullSectionFrame.src = src;
+
+        fullSectionFrame.onload = function () {
+            // Adjust the iframe height based on the content
+            const contentHeight = fullSectionFrame.contentWindow.document.body.scrollHeight;
+            const adjustedHeight = Math.max(contentHeight, window.innerHeight) + 'px';
+            
+            fullSectionFrame.style.height = adjustedHeight;
+
+            // Adjust the container height
+            if (fullSectionContainer) {
+                fullSectionContainer.style.minHeight = adjustedHeight;
+            }
+        };
     }
 
     document.documentElement.style.overflow = 'hidden';
@@ -78,14 +86,18 @@ window.onload = function() {
     const leftSection = document.querySelector('.left');
     const rightSection = document.querySelector('.right');
     const slides = document.querySelector('.slides');
-    const dynamicContent = document.getElementById('dynamic-content');
+    const fullSectionFrame = document.getElementById('full-section-frame');
+    const fullSectionContainer = document.querySelector('section.iframe-container');
 
     if (leftSection) leftSection.style.display = 'block';
     if (rightSection) rightSection.style.display = 'block';
     if (slides) slides.style.display = 'flex';
 
-    if (dynamicContent) dynamicContent.style.display = 'none';
-    dynamicContent.innerHTML = '';
+    if (fullSectionFrame) {
+      fullSectionFrame.style.display = 'none';
+      fullSectionFrame.src = ""; // iframe의 콘텐츠를 리셋합니다.
+    }
+    if (fullSectionContainer) fullSectionContainer.style.display = 'none';
 
     document.documentElement.style.overflow = 'auto';
     document.body.style.overflow = 'auto';

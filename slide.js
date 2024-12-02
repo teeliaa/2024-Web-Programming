@@ -13,17 +13,10 @@ $(document).ready(function() {
     showSlide(currentSlide + 1);
   }, 3000);
 
-  function adjustIframeHeight(iframe) {
-    if (iframe) {
-      $(iframe).on('load', function () {
-        const contentHeight = $(iframe).contents().find('body').prop('scrollHeight') + 'px';
-        $(iframe).css('height', contentHeight);
-
-        const fullSectionContainer = $('section.iframe-container');
-        if (fullSectionContainer.length) {
-          fullSectionContainer.css('height', contentHeight);
-        }
-      });
+  function adjustContainerHeight(container) {
+    if (container) {
+      const contentHeight = container.prop('scrollHeight') + 'px';
+      container.css('height', contentHeight);
     }
   }
 
@@ -36,6 +29,7 @@ $(document).ready(function() {
     if (slides.length) slides.hide();
     if (iframe.length) {
       iframe.show().attr('src', src);
+      adjustIframeHeight(iframe);
     }
     if (leftSection.length) leftSection.show();
     if (rightSection.length) rightSection.show();
@@ -58,7 +52,8 @@ $(document).ready(function() {
         url: url,
         method: 'GET',
         success: function(data) {
-          fullSectionContainer.html(data).show().css('height', '100vh');
+          fullSectionContainer.html(data).show();
+          adjustContainerHeight(fullSectionContainer);
         },
         error: function(xhr, status, error) {
           console.error('Error loading content:', status, error);

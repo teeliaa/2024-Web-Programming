@@ -120,3 +120,11 @@ section{
 .highlighted {
   background-color: #f3d8c7; /* 클릭 시 색칠된 색상 */
 }
+
+iframe {
+  width: 100%;
+  max-width: 100%; /* Prevent overflow */
+  height: auto; /* Maintain aspect ratio */
+  aspect-ratio: 16 / 9; /* Enforce 16:9 aspect ratio */
+  border: none; /* Remove border */
+      }

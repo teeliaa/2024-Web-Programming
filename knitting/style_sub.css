@@ -50,6 +50,15 @@ input[type="text"] {
   width: 80%;/**/
 }
 
+input[type="number"] {
+  width: 200px;
+  text-align: center;
+  font-size: 20px;
+  padding: 5px;
+  margin: 5px;
+  justify-content: center;
+}
+
 button{
   font-size: 17px;
   font-weight: 500;

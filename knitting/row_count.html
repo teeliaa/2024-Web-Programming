@@ -10,14 +10,17 @@
     <style media="screen">
       button{
         margin: 0 10px;
+        width: 160px;
       }
     </style>
   </head>
   <body>
     <h3 style="text-align: center">단수 기록기</h3>
     <p style="text-align: center">
-      <button type="button" name="button" onclick="addRow()">단 추가하기</button>
+      <input type="number" id="rowInput" placeholder="떠야할 단 입력">
+      <button type="button" name="button" onclick="addRows()">단 추가하기</button><br><br>
       <button type="button" name="button" onclick="removeRow()">단 삭제하기</button>
+      <button type="button" onclick="removeAllRows()">단 일괄 삭제하기</button>
       <button type="button" name="button" onclick="resetAllColors()">기록 초기화하기</button>
     </p><br><br>
 
@@ -29,42 +32,91 @@
     <script type="text/javascript">
       let rowCount = 0; // 현재 단수의 개수
 
-      function addRow() {
-        rowCount++;
+      // 페이지 로드 시 기존 기록 불러오기
+      window.onload = function () {
+        const savedRows = JSON.parse(localStorage.getItem("rowRecords")) || [];
+        rowCount = savedRows.length;
 
-        // 새로운 원(div)을 생성
+        savedRows.forEach(({ number, highlighted }) => {
+          createRow(number, highlighted);
+        });
+      };
+
+      // 새로운 원을 생성하는 함수
+      function createRow(rowNum, isHighlighted = false) {
         const newRow = document.createElement("div");
         newRow.className = "circle";
-        newRow.textContent = rowCount; // 원 내부에 번호 표시
+        newRow.textContent = rowNum;
+
+        if(isHighlighted){
+          newRow.classList.add("highlighted");
+        }
 
         // 원 클릭 시 색칠/색 제거 기능 추가
-        newRow.addEventListener("click", function() {
-          if (newRow.classList.contains("highlighted")) {
-            newRow.classList.remove("highlighted"); // 색 제거
-          } else {
-            newRow.classList.add("highlighted"); // 색칠
-          }
+        newRow.addEventListener("click", function () {
+          newRow.classList.toggle("highlighted");
+          saveRows();
         });
 
-        // rowContainer에 새로운 원 추가
         const rowContainer = document.getElementById("rowContainer");
         rowContainer.appendChild(newRow);
       }
 
+      // 단수 입력받아 일괄 추가
+      function addRows() {
+        const rowInput = document.getElementById("rowInput");
+        const rowCountToAdd = parseInt(rowInput.value);
+
+        if (!rowCountToAdd || rowCountToAdd <= 0) {
+          alert("올바른 단수를 입력해주세요.");
+          return;
+        }
+
+        for (let i = 1; i <= rowCountToAdd; i++) {
+          rowCount++;
+          createRow(rowCount);
+        }
+
+        saveRows();
+        rowInput.value = ""; // 입력값 초기화
+      }
+
+      // 하나 삭제하기
       function removeRow() {
         if (rowCount > 0) {
           const rowContainer = document.getElementById("rowContainer");
-          rowContainer.removeChild(rowContainer.lastElementChild); // 마지막 원 삭제
+          rowContainer.removeChild(rowContainer.lastElementChild);
           rowCount--;
+          saveRows();
         }
       }
 
-      // 모든 원의 색을 초기화하는 함수
+      // 일괄 삭제하기
+      function removeAllRows() {
+        const rowContainer = document.getElementById("rowContainer");
+        rowContainer.innerHTML = "";
+        rowCount = 0;
+        saveRows();
+      }
+
+      // 모든 원의 색 초기화
       function resetAllColors() {
         const rows = document.querySelectorAll("#rowContainer .circle");
-        rows.forEach(function(row) {
-          row.classList.remove("highlighted"); // 모든 원의 색 제거
+        rows.forEach((row) => row.classList.remove("highlighted"));
+        saveRows();
+      }
+
+      // localStorage에 단수 기록 저장
+      function saveRows() {
+        const rows = [];
+        const rowElements = document.querySelectorAll("#rowContainer .circle");
+        rowElements.forEach((row) => {
+          rows.push({
+            number: parseInt(row.textContent),
+            highlighted: row.classList.contains("highlighted"),
+          });
         });
+        localStorage.setItem("rowRecords", JSON.stringify(rows));
       }
     </script>
   </body>
